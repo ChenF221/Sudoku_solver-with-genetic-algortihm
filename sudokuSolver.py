@@ -1,12 +1,11 @@
-import random as rndm
-import time
+import random 
 
 def generar_gen(initial=None):
     if initial is None:
         initial = [0] * 9
     mapp = {}
     gen = list(range(1, 10))
-    rndm.shuffle(gen)
+    random.shuffle(gen)
     for i in range(9):
         mapp[gen[i]] = i
     for i in range(9):
@@ -70,7 +69,7 @@ def cruzar(ch1, ch2):
     nuevo_hijo_1 = []
     nuevo_hijo_2 = []
     for i in range(9):
-        x = rndm.randint(0, 1)
+        x = random.randint(0, 1)
         if x == 1:
             nuevo_hijo_1.append(ch1[i])
             nuevo_hijo_2.append(ch2[i])
@@ -81,7 +80,7 @@ def cruzar(ch1, ch2):
 
 def mutacion(ch, pm, initial):
     for i in range(9):
-        x = rndm.randint(0, 100)
+        x = random.randint(0, 100)
         if x < pm * 100:
             ch[i] = generar_gen(initial[i])
     return ch
@@ -103,7 +102,7 @@ def r_obtener_piscina_mating(populacion):
     lista_aptitudes.sort()
     peso = list(range(1, len(lista_aptitudes) + 1))
     for _ in range(len(populacion)):
-        ch = rndm.choices(lista_aptitudes, peso)[0]
+        ch = random.choices(lista_aptitudes, peso)[0]
         piscina.append(ch[1])
     return piscina
 
@@ -115,7 +114,7 @@ def w_obtener_piscina_mating(populacion):
         lista_aptitudes.append((aptitud, cromosoma))
     peso = [fit[0] - lista_aptitudes[0][0] for fit in lista_aptitudes]
     for _ in range(len(populacion)):
-        ch = rndm.choices(lista_aptitudes, weights=peso)[0]
+        ch = random.choices(lista_aptitudes, weights=peso)[0]
         piscina.append(ch[1])
     return piscina
 
@@ -125,7 +124,7 @@ def obtener_descendencia(populacion, initial, pm, pc):
     while i < len(populacion):
         ch1 = populacion[i]
         ch2 = populacion[(i + 1) % len(populacion)]
-        x = rndm.randint(0, 100)
+        x = random.randint(0, 100)
         if x < pc * 100:
             ch1, ch2 = cruzar(ch1, ch2)
         nueva_piscina.append(mutacion(ch1, pm, initial))
@@ -147,7 +146,7 @@ def algoritmo_genetico(initial, POBLACION, REPETICION, PM, PC, callback=None):
 
     for iteracion in range(REPETICION):
         piscina_mating = r_obtener_piscina_mating(poblacion)
-        rndm.shuffle(piscina_mating)
+        random.shuffle(piscina_mating)
         poblacion = obtener_descendencia(piscina_mating, initial, PM, PC)
         aptitudes = [obtener_fitness(c) for c in poblacion]
         m = max(aptitudes)
