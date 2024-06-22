@@ -52,10 +52,10 @@ This file implements a genetic algorithm to solve Sudoku puzzles. Key components
    - A Sudoku puzzle will be displayed on the board.
 
 2. **Solving the Sudoku**:
-   - Input population size: 100
+   - Input population size: 400
    - Input number of generations: 1000
-   - Input mutation probability: 0.01
-   - Input crossover probability: 0.7
+   - Input mutation probability: 0.1
+   - Input crossover probability: 0.85
    - Click "Solve Sudoku".
    - The GUI will display the progress and the time taken to find a solution.
 
