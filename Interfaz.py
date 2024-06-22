@@ -1,8 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from sudokuGenerator import Sudoku
-from sudokuSolver import algoritmo_genetico, obtener_fitness  # Add this import
-import random as rndm
+from sudokuSolver import algoritmo_genetico, obtener_fitness
 import time
 
 class SudokuGUI:

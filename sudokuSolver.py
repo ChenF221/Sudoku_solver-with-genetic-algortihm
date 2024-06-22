@@ -57,7 +57,7 @@ def obtener_fitness(cromosoma):
     return fitness
 
 ch = generar_cromosoma()
-print(obtener_fitness(ch))
+#print(obtener_fitness(ch))
 
 def imprimir_cromosoma(ch):
     for i in range(9):
