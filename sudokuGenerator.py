@@ -89,9 +89,9 @@ class Sudoku:
         if self.difficulty_level == "Fácil":
             count = 30
         elif self.difficulty_level == "Intermedio":
-            count = 40
+            count = 37
         elif self.difficulty_level == "Avanzado":
-            count = 48
+            count = 40
         else:
             raise ValueError("Invalid difficulty level")
 
