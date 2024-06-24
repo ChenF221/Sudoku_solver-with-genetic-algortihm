@@ -1,4 +1,5 @@
 import random
+import numpy as np
 
 def generar_gen(initial=None):
     """Genera un gen aleatorio o ajustado inicialmente."""
@@ -98,18 +99,31 @@ def mutacion(ch, pm, initial):
             ch[i] = generar_gen(initial[i])
     return ch
 
+# Función para realizar la selección por ruleta
+def roulette_wheel_selection(probabilities):
+    cumulative_sum = np.cumsum(probabilities)
+    random_number = np.random.rand()
+    for i, cumulative_prob in enumerate(cumulative_sum):
+        if random_number < cumulative_prob:
+            return i
+        
 def obtener_piscina_mating(populacion):
     """Selecciona la piscina de apareamiento usando ruleta."""
     lista_aptitudes = []
-    piscina = []
     for cromosoma in populacion:
         aptitud = obtener_fitness(cromosoma)
-        lista_aptitudes.append((aptitud, cromosoma))
-    lista_aptitudes.sort()
-    peso = list(range(1, len(lista_aptitudes) + 1))
+        lista_aptitudes.append(aptitud)
+    
+    # Normalizar las aptitudes para convertirlas en probabilidades
+    min_aptitud = min(lista_aptitudes)
+    adjusted_fitness = [aptitud - min_aptitud + 1 for aptitud in lista_aptitudes]  # Ajustar para evitar valores negativos
+    total_fitness = sum(adjusted_fitness)
+    probabilities = [fit / total_fitness for fit in adjusted_fitness]
+    
+    piscina = []
     for _ in range(len(populacion)):
-        ch = random.choices(lista_aptitudes, peso)[0]
-        piscina.append(ch[1])
+        idx = roulette_wheel_selection(probabilities)
+        piscina.append(populacion[idx])
     return piscina
 
 def obtener_descendencia(populacion, initial, pm, pc):
