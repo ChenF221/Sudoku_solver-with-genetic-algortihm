@@ -1,3 +1,9 @@
+'''
+Authors: Chen Yangfeng, Diaz Jimenez Jorge Arif, 5BM1, Escom IPN
+26/jun/24  Algoritmos Bioinpirados, Proyecto Final
+Sudoku_solver-with-genetic-algortihm
+'''
+
 import random
 import math
 
